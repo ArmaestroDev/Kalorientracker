@@ -1,6 +1,6 @@
 # Kalorientracker für Android
 
-Ein nativer und einfach zu bedienender Kalorientracker für Android. Diese App wurde entwickelt, um die tägliche Nahrungsaufnahme unkompliziert zu protokollieren und Fitnessziele zu unterstützen. Das Projekt ist in Android Studio entwickelt und nutzt [Haupt-Programmiersprache, z.B. Kotlin oder Java].
+Ein nativer und einfach zu bedienender Kalorientracker für Android. Diese App wurde entwickelt, um die tägliche Nahrungsaufnahme unkompliziert zu protokollieren und Fitnessziele zu unterstützen. Das Projekt ist in Android Studio entwickelt und nutzt Kotlin.
 
 <img src="https://github.com/user-attachments/assets/e2c36eda-d5c5-457c-8380-2fe6071a2222" alt="App Screenshot" width="350"/>
 ---
