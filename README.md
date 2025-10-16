@@ -2,9 +2,7 @@
 
 Ein nativer und einfach zu bedienender Kalorientracker für Android. Diese App wurde entwickelt, um die tägliche Nahrungsaufnahme unkompliziert zu protokollieren und Fitnessziele zu unterstützen. Das Projekt ist in Android Studio entwickelt und nutzt [Haupt-Programmiersprache, z.B. Kotlin oder Java].
 
-![App Screenshot]([Link zu einem Screenshot oder GIF der App])
-*(Tipp: Du kannst Screenshots direkt vom Android Emulator machen und hier einfügen.)*
-
+![Image](https://github.com/user-attachments/assets/e2c36eda-d5c5-457c-8380-2fe6071a2222)
 ---
 
 ## Inhaltsverzeichnis
@@ -37,10 +35,9 @@ Dieses Projekt ist eine native Android-Anwendung, die es Benutzern ermöglicht, 
 
 Dieses Projekt wurde mit den folgenden Technologien umgesetzt:
 
--   **Sprache:** [Kotlin / Java]
--   **Architektur:** [z.B. MVVM, MVP, MVI]
--   **UI:** [XML mit Views / Jetpack Compose]
--   **Kernkomponenten:** [z.B. Android SDK, Room Database, LiveData, ViewModel, Coroutines]
+-   **Sprache:** Kotlin
+-   **UI:** Jetpack Compose
+-   **Kernkomponenten:** Android SDK, Room Database, Gemini API
 
 ---
 
@@ -73,11 +70,16 @@ Stelle sicher, dass die folgende Software auf deinem System installiert ist:
 
 Die App wird nun auf dem ausgewählten Gerät oder Emulator installiert und gestartet.
 
+### Alternative
+
+Installiere die APK bei den Releases auf einem Android Gerät oder Emulator.
+
+
 ---
 
 ## Verwendung
 
-Nachdem die App gestartet ist, kannst du beginnen, deine Mahlzeiten hinzuzufügen.
+Nachdem die App gestartet ist, kannst du beginnen, deine Mahlzeiten hinzuzufügen. Zuvor musst du deine Profildaten eingeben, sowie auch deinen Gemini API Key, den sich jeder kostenlos besorgen kann: [https://ai.google.dev/gemini-api/docs/api-key](https://ai.google.dev/gemini-api/docs/api-key)
 
 1.  **Mahlzeit hinzufügen:** Tippe auf den entsprechenden Button, um eine neue Mahlzeit einzugeben. Oder scanne das Produkt mit dem Barcode-Scanner und gebe die Grammmenge ein!
 2.  **Aktivitäten hinzufügen:** Tippe auf den entsprechenden Button, um eine neue Aktivität einzugeben.
