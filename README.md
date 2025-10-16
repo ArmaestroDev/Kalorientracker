@@ -50,7 +50,7 @@ Folge diesen Schritten, um das Projekt lokal auf deinem Rechner einzurichten und
 Stelle sicher, dass die folgende Software auf deinem System installiert ist:
 
 -   **Android Studio:** Die offizielle IDE für die Android-Entwicklung. (Neueste stabile Version empfohlen)
--   **Android SDK:** Mindestens API-Level [z.B. 21] oder höher. (Wird normalerweise mit Android Studio installiert)
+-   **Android SDK:** Mindestens API-Level 24 bzw. Android Version 7.0.
 
 ### Installation & Ausführung
 
