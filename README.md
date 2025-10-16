@@ -37,7 +37,7 @@ Dieses Projekt wurde mit den folgenden Technologien umgesetzt:
 
 -   **Sprache:** Kotlin
 -   **UI:** Jetpack Compose
--   **Kernkomponenten:** Android SDK, Room Database, Gemini API
+-   **Kernkomponenten:** Android SDK, Room Database, Gemini API, OpenFoodFacts-API (siehe [https://github.com/openfoodfacts/openfoodfacts-server](https://github.com/openfoodfacts/openfoodfacts-server))
 
 ---
 
