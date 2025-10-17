@@ -47,10 +47,12 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
+import androidx.compose.material3.Divider
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -167,7 +169,24 @@ fun CalorieTrackerScreen(
     val totalCarbs = dailyLog.foodEntries.sumOf { it.carbs }
     val totalFat = dailyLog.foodEntries.sumOf { it.fat }
     val caloriesBurned = dailyLog.activityEntries.sumOf { it.caloriesBurned }
-    val netCalories = totalCalories - caloriesBurned
+
+// Zuerst sicherstellen, dass wir mit Fließkommazahlen rechnen, um Rundungsfehler zu vermeiden
+    val originalTotalCalories = uiState.goals.calories.takeIf { it > 0 }?.toFloat() ?: 1.0f // Division durch 0 vermeiden und in Float umwandeln
+
+// Prozentuale Verteilung als Fließkommazahlen berechnen
+    val proteinPercentage = (uiState.goals.proteinGrams * 4) / originalTotalCalories
+    val carbsPercentage = (uiState.goals.carbsGrams * 4) / originalTotalCalories
+    val fatPercentage = (uiState.goals.fatGrams * 9) / originalTotalCalories
+
+// Dann die verbrannten Kalorien proportional aufteilen
+    val adjustedGoals = uiState.goals.copy(
+        calories = uiState.goals.calories + caloriesBurned,
+        proteinGrams = (uiState.goals.proteinGrams + ((caloriesBurned * proteinPercentage) / 4)).toInt(),
+        carbsGrams = (uiState.goals.carbsGrams + ((caloriesBurned * carbsPercentage) / 4)).toInt(),
+        fatGrams = (uiState.goals.fatGrams + ((caloriesBurned * fatPercentage) / 9)).toInt()
+    )
+
+
 
     Scaffold(
         topBar = {
@@ -257,7 +276,7 @@ fun CalorieTrackerScreen(
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier
-                        .padding(horizontal = 16.dp) // Add some space around the text
+                        .padding(horizontal = 16.dp)
                         .clickable { showDatePicker = true },
                     textAlign = TextAlign.Center
                 )
@@ -273,11 +292,11 @@ fun CalorieTrackerScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             GoalsSummaryCard(
-                netCalories = netCalories,
-                totalProtein = totalProtein.toInt(),
-                totalCarbs = totalCarbs.toInt(),
-                totalFat = totalFat.toInt(),
-                goals = uiState.goals,
+                netCalories = totalCalories,
+                totalProtein = totalProtein,
+                totalCarbs = totalCarbs,
+                totalFat = totalFat,
+                goals = adjustedGoals,
                 onSetGoals = onNavigateToProfile
             )
 
@@ -292,6 +311,15 @@ fun CalorieTrackerScreen(
                             food = food,
                             onEdit = { editingFood = food },
                             onDelete = { deletingFood = food })
+                    }
+                    if (dailyLog.foodEntries.isNotEmpty() && dailyLog.activityEntries.isNotEmpty()) {
+                        item { // Den Divider in ein 'item' packen
+                            HorizontalDivider(
+                                modifier = Modifier.padding(vertical = 16.dp, horizontal = 8.dp),
+                                thickness = 1.dp,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
+                            )
+                        }
                     }
                     items(dailyLog.activityEntries, key = { it.id }) { activity ->
                         ActivityItemRow(
@@ -329,10 +357,11 @@ fun CalorieTrackerScreen(
             }
         )
     }
-    if (showAddActivityDialog) AddActivityDialog(
-        onDismiss = { showAddActivityDialog = false },
-        onAddActivity = { name -> viewModel.addActivityItem(name); showAddActivityDialog = false }
-    )
+    if (showAddActivityDialog)
+        AddActivityDialog(
+            onDismiss = { showAddActivityDialog = false },
+            onAddActivity = { name -> viewModel.addActivityItem(name); showAddActivityDialog = false }
+        )
     deletingFood?.let { food -> DeleteConfirmationDialog(
         itemName = food.name,
         onDismiss = { deletingFood = null },
@@ -794,9 +823,9 @@ fun EditFoodDialog(
                         val updatedFood = foodEntry.copy(
                             name = name,
                             calories = calories.toIntOrNull() ?: foodEntry.calories,
-                            protein = protein.toDoubleOrNull() ?: foodEntry.protein,
-                            carbs = carbs.toDoubleOrNull() ?: foodEntry.carbs,
-                            fat = fat.toDoubleOrNull() ?: foodEntry.fat
+                            protein = protein.toIntOrNull() ?: foodEntry.protein,
+                            carbs = carbs.toIntOrNull() ?: foodEntry.carbs,
+                            fat = fat.toIntOrNull() ?: foodEntry.fat
                         )
                         onSaveManual(updatedFood)
                     },

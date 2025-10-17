@@ -104,10 +104,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 if (nutritionInfo != null && nutritionInfo.calories > 0) {
                     val newEntry = FoodEntry(
                         name = nutritionInfo.name,
-                        calories = nutritionInfo.calories,
-                        protein = nutritionInfo.protein,
-                        carbs = nutritionInfo.carbs,
-                        fat = nutritionInfo.fat,
+                        calories = (nutritionInfo.calories),
+                        protein = (nutritionInfo.protein).toInt(),
+                        carbs = (nutritionInfo.carbs).toInt(),
+                        fat = (nutritionInfo.fat).toInt(),
                         date = _selectedDate.value
                     )
                     logRepository.addFoodEntry(newEntry)
@@ -145,9 +145,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val newEntry = FoodEntry(
                 name = "${foodInfo.name} (${grams}g)",
                 calories = (foodInfo.calories * factor).toInt(),
-                protein = foodInfo.protein * factor,
-                carbs = foodInfo.carbs * factor,
-                fat = foodInfo.fat * factor,
+                protein = (foodInfo.protein * factor).toInt(),
+                carbs = (foodInfo.carbs * factor).toInt(),
+                fat = (foodInfo.fat * factor).toInt(),
                 date = _selectedDate.value
             )
             logRepository.addFoodEntry(newEntry)
@@ -168,7 +168,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 val activityInfo = apiServiceRepository.fetchActivityCalories(activityName)
                 if (activityInfo != null && activityInfo.calories_burned > 0) {
                     val newEntry = ActivityEntry(
-                        name = activityInfo.name,
+                        name = activityName,
                         caloriesBurned = activityInfo.calories_burned,
                         date = _selectedDate.value
                     )
@@ -195,10 +195,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 if (nutritionInfo != null && nutritionInfo.calories > 0) {
                     val updatedEntry = foodEntry.copy(
                         name = nutritionInfo.name,
-                        calories = nutritionInfo.calories,
-                        protein = nutritionInfo.protein,
-                        carbs = nutritionInfo.carbs,
-                        fat = nutritionInfo.fat
+                        calories = (nutritionInfo.calories),
+                        protein = (nutritionInfo.protein).toInt(),
+                        carbs = (nutritionInfo.carbs).toInt(),
+                        fat = (nutritionInfo.fat).toInt(),
                     )
                     logRepository.updateFoodEntry(updatedEntry)
                 } else {

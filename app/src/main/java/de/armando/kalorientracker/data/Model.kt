@@ -6,17 +6,15 @@ import kotlinx.serialization.Serializable
 import java.time.LocalDate
 import java.util.UUID
 
-// --- Daily Log Entries (Now as Room Entities) ---
-
 @Entity(tableName = "food_entries")
 data class FoodEntry(
     @PrimaryKey
     val id: String = UUID.randomUUID().toString(),
     val name: String,
     val calories: Int,
-    val protein: Double,
-    val carbs: Double,
-    val fat: Double,
+    var protein: Int,
+    val carbs: Int,
+    val fat: Int,
     val date: LocalDate
 )
 

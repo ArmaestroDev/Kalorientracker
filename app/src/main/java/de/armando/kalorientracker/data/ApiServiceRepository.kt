@@ -14,7 +14,6 @@ import okhttp3.Response
 import java.io.IOException
 
 class ApiServiceRepository(private val apiService: GeminiApiService) {
-    private val client = OkHttpClient()
     // Initialisiert den API-Service für die Barcode-Abfrage
     private val foodApiService: FoodApiService = RetrofitInstance.api
 
