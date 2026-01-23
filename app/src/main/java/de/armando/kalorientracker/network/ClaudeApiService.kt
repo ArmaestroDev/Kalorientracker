@@ -77,7 +77,7 @@ interface ClaudeApi {
 
 @Serializable
 data class ClaudeRequest(
-    val model: String = "claude-3-5-sonnet-20240620",
+    val model: String = "claude-4-5-sonnet",
     val max_tokens: Int = 1024,
     val messages: List<Message>
 )
